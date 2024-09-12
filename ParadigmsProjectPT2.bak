@@ -1,0 +1,28 @@
+#lang racket
+
+;1 Read Query File -> List
+;2 Read Databse Files 1 by one -> indiv list
+;3 Store all database lists into List of List
+;4 Normalize Query
+;5 Normalize all database
+;6 Apply distance function to all database images store as a list of pairs: (distance, name-of-picture)
+;7 Sort this list, return 5 closest image's names
+
+(define (similaritySearch queryHistogramFilename imageDatasetDirectory)
+  (display (storeFile queryHistogramFilename))
+  )
+
+;From Lec 5
+(define (storeFile filePath)
+  (let ((p (open-input-file filePath)))
+    (let f ((x (read p))) ; reading from file
+      (if (eof-object? x) ; check for eof
+          (begin
+            (close-input-port p)
+            '())
+          (cons x (f (read p))))))
+  )
+
+
+;Call Main Function
+(similaritySearch "q00.txt" "imageDataset2_15_20")
